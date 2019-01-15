@@ -5,7 +5,8 @@ class Search extends Component {
   state = {
     search: '',
     results: '',
-    err: null
+    err: null,
+    success: false
   }
   render() {
     return (
@@ -18,6 +19,7 @@ class Search extends Component {
         value={this.state.search}
         onChange={this.handleChange}
         required/>
+        <button className='submit_button'>Search For Broken Links</button>
         </form>
       </div>
     );
@@ -25,7 +27,13 @@ class Search extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    applicationCache
+    api.getLinkData(this.state.search)
+    .then(results => {
+      this.setState({ search: '', results, success: true});
+    })
+    .catch(err => {
+      this.setState({err: true})
+    });
   }
 
   handleChange = ({target: { value, id }}) => {
