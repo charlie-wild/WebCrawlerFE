@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Results from "../components/Results";
-import './search.css'
+import "./search.css";
 import * as api from "./api";
 
 class Search extends Component {
@@ -15,7 +15,9 @@ class Search extends Component {
   render() {
     return (
       <div className="search">
-        <h1 className="search_header title is-1">Enter A URL To Find The Broken Links</h1>
+        <h1 className="search_header title is-1">
+          Enter A URL To Find The Broken Links
+        </h1>
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
@@ -26,16 +28,17 @@ class Search extends Component {
             onChange={this.handleChange}
             required
           />
-          <button className="submit_button button is-primary">Search For Broken Links</button>
-         
+          <button className="submit_button button is-primary">
+            Search For Broken Links
+          </button>
         </form>
-        <br/>
+        <br />
         {this.state.err && (
           <p>There has been an error! Please try with a valid Url.</p>
         )}
         {this.state.success && <p>successful search!</p>}
         <div className="results">
-          <Results results={this.state.results} />
+        {this.state.searched && <Results results={this.state.results}/>}
         </div>
       </div>
     );
@@ -53,14 +56,14 @@ class Search extends Component {
     if (validUrls.includes(search)) {
       if (performedSearches.includes(search)) {
         const cachedResult = JSON.parse(sessionStorage.getItem(search));
-        this.setState({ results: cachedResult, err: false });
+        this.setState({ results: cachedResult, err: false, searched: true});
       } else {
         e.preventDefault();
         performedSearches.push(search);
         api
           .getLinkData(search)
           .then(results => {
-            this.setState({ search: "", results, success: true, err: false });
+            this.setState({ search: "", results, success: true, err: false, searched: true });
             sessionStorage.setItem(search, JSON.stringify(results));
           })
           .catch(err => {
