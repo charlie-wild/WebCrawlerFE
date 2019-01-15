@@ -27,7 +27,7 @@ class Results extends Component {
 					<section className='resultsHeader'>
 						<h1>Results</h1>
 						<h3>Visual Results Breakdown</h3>
-						{fileDownload(BrokenLinks, 'filename.csv')}
+						{fileDownload(BrokenLinks, 'BrokenLinks.csv')}
 						<Doughnut
 							data={data}
 							width={50}
