@@ -14,7 +14,7 @@ class Search extends Component {
   render() {
     return (
       <div className="search">
-        <h2 className="search_header">Enter a URL to Search</h2>
+        <h1 className="search_header title is-1">Enter A URL To Find The Broken Links</h1>
 
         <form onSubmit={this.handleSubmit}>
           <input
