@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Results from "./components/Results";
+import Results from "../components/Results";
 import * as api from "./api";
 
 class Search extends Component {
@@ -7,12 +7,14 @@ class Search extends Component {
     search: "",
     results: "",
     err: null,
-    success: false
+    success: false,
+    searched: false
   };
   render() {
     return (
       <div className="search">
         <h2 className="search_header">Enter a URL to Search</h2>
+        
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
@@ -25,6 +27,7 @@ class Search extends Component {
           />
           <button className="submit_button">Search For Broken Links</button>
         </form>
+        {this.state.err && <p>There has been an error! Please try with a valid Url.</p>}
         {this.state.success && <p>successful search!</p>}
         <div className="results">
           <Results results={this.state.results}/>
