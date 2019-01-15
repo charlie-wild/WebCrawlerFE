@@ -1,18 +1,21 @@
 import React, { Component } from "react";
-import Results from "./components/Results";
+import Results from "../components/Results";
 import * as api from "./api";
 
 class Search extends Component {
   state = {
     search: "",
     results: "",
+    performedSearches: [],
     err: null,
-    success: false
+    success: false,
+    searched: false
   };
   render() {
     return (
       <div className="search">
         <h2 className="search_header">Enter a URL to Search</h2>
+
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
@@ -25,16 +28,19 @@ class Search extends Component {
           />
           <button className="submit_button">Search For Broken Links</button>
         </form>
+        {this.state.err && (
+          <p>There has been an error! Please try with a valid Url.</p>
+        )}
         {this.state.success && <p>successful search!</p>}
         <div className="results">
-          <Results results={this.state.results}/>
+          <Results results={this.state.results} />
         </div>
       </div>
     );
   }
 
   handleSubmit = e => {
-    const { search } = this.state;
+    const { search, performedSearches } = this.state;
     const validUrls = [
       "https://broken-links-api.herokuapp.com/",
       "https://web-crawler-test1.herokuapp.com/",
@@ -43,15 +49,22 @@ class Search extends Component {
       "https://random-static-linky-site-02.herokuapp.com/"
     ];
     if (validUrls.includes(search)) {
-      e.preventDefault();
-      api
-        .getLinkData(search)
-        .then(results => {
-          this.setState({ search: "", results, success: true });
-        })
-        .catch(err => {
-          this.setState({ err: true });
-        });
+      if (performedSearches.includes(search)) {
+        const cachedResult = JSON.parse(sessionStorage.getItem(search));
+        this.setState({ results: cachedResult, err: false });
+      } else {
+        e.preventDefault();
+        performedSearches.push(search);
+        api
+          .getLinkData(search)
+          .then(results => {
+            this.setState({ search: "", results, success: true, err: false });
+            sessionStorage.setItem(search, JSON.stringify(results));
+          })
+          .catch(err => {
+            this.setState({ err: true });
+          });
+      }
     } else {
       e.preventDefault();
       this.setState({ search: "", err: true });
