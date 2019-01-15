@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Results from "../components/Results";
+import './search.css'
 import * as api from "./api";
 
 class Search extends Component {
@@ -15,19 +16,20 @@ class Search extends Component {
     return (
       <div className="search">
         <h1 className="search_header title is-1">Enter A URL To Find The Broken Links</h1>
-
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
             placeholder="What is your url?"
             id="search"
-            className="search_bar"
+            className="search_bar input is-primary is-rounded"
             value={this.state.search}
             onChange={this.handleChange}
             required
           />
-          <button className="submit_button">Search For Broken Links</button>
+          <button className="submit_button button is-primary">Search For Broken Links</button>
+         
         </form>
+        <br/>
         {this.state.err && (
           <p>There has been an error! Please try with a valid Url.</p>
         )}
