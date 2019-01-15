@@ -21,7 +21,9 @@ class Search extends Component {
         required/>
         <button className='submit_button'>Search For Broken Links</button>
         </form>
+        {this.state.success && <p>successful search!</p>}
       </div>
+      
     );
   }
 
