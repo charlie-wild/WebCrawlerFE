@@ -22,7 +22,11 @@
   "homepage": "https://github.com/charlie-wild/WebCrawlerFE#readme",
   "dependencies": {
     "axios": "^0.18.0",
+    "bulma": "^0.7.2",
+    "chart.js": "^2.7.3",
+    "js-file-download": "^0.4.4",
     "react": "^16.7.0",
+    "react-chartjs-2": "^2.7.4",
     "react-dom": "^16.7.0",
     "react-scripts": "^2.1.3"
   },
