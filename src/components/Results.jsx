@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Doughnut } from 'react-chartjs-2';
+import './results.css';
 const fileDownload = require('js-file-download');
 
 class Results extends Component {
 	state = {
-		BrokenLinks: [ 1, 2, 3, 4, 5, 6 ],
+		BrokenLinks: [ 'hello', 'is', 'it', 'me', 'you', 'are', 'looking', 'for' ],
 		LinkNumber: 20,
 		BrokenLinkNumber: 8
 	};
@@ -17,8 +18,8 @@ class Results extends Component {
 			datasets: [
 				{
 					data: [ BrokenLinkNumber, WorkingLinks ],
-					backgroundColor: [ '#FF6384', '#36A2EB', '#FFCE56' ],
-					hoverBackgroundColor: [ '#FF6384', '#36A2EB', '#FFCE56' ]
+					backgroundColor: [ '#FF6384', '#36A2EB' ],
+					hoverBackgroundColor: [ '#FF6384', '#36A2EB' ]
 				}
 			]
 		};
@@ -27,8 +28,20 @@ class Results extends Component {
 				<section className='resultsMain'>
 					<section className='resultsHeader'>
 						<h1>Results</h1>
-						<h3>Visual Results Breakdown</h3>
-						{fileDownload(BrokenLinks, 'BrokenLinks.csv')}
+						<h4>Visual Results Breakdown</h4>
+						<p id='allLinks'>
+							<label htmlFor='allLinks' className='authFormLabel'>
+								All Links:
+							</label>
+							{` ${LinkNumber}`}
+						</p>
+						<p id='allLinks'>
+							<label htmlFor='allLinks' className='authFormLabel'>
+								Broken Links:
+							</label>
+							{` ${BrokenLinkNumber}`}
+						</p>
+						{/* {fileDownload(BrokenLinks, 'BrokenLinks.csv')} */}
 						<p>{`${donutVal}% of the links are broken`}</p>
 						<section className='chart'>
 							<Doughnut
@@ -38,22 +51,9 @@ class Results extends Component {
 								}}
 							/>
 						</section>
-
-						<p id='allLinks'>
-							<label htmlFor='allLinks' className='authFormLabel'>
-								All Links:
-							</label>
-							{LinkNumber}
-						</p>
-						<p id='allLinks'>
-							<label htmlFor='allLinks' className='authFormLabel'>
-								All Links:
-							</label>
-							{BrokenLinkNumber}
-						</p>
 					</section>
 					<section>
-						<h3>Individual Links</h3>
+						<h4>List of Broken Links</h4>
 						{BrokenLinks.map((link) => {
 							return <li key={link}>{link}</li>;
 						})}

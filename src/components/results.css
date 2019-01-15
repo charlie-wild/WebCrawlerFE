@@ -1,1 +1,14 @@
+h1 {
+	text-decoration: underline;
+}
 
+li {
+	list-style-type: none;
+	color: #ff6384;
+	background-color: #36a2eb;
+}
+
+li:nth-child(even) {
+	color: #36a2eb;
+	background-color: #ff6384;
+}
