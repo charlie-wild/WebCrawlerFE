@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 class Search extends Component {
   state = {
     search: '',
+    results: '',
     err: null
   }
   render() {
