@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Results from "./components/Results";
 import * as api from "./api";
 
 class Search extends Component {
@@ -25,6 +26,9 @@ class Search extends Component {
           <button className="submit_button">Search For Broken Links</button>
         </form>
         {this.state.success && <p>successful search!</p>}
+        <div className="results">
+          <Results results={this.state.results}/>
+        </div>
       </div>
     );
   }
