@@ -1,0 +1,23 @@
+h2 {
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+h4 {
+	font-style: italic;
+}
+
+li {
+	list-style-type: none;
+	color: white;
+	background-color: #36a2eb;
+}
+
+li:nth-child(even) {
+	color: white;
+	background-color: #00d1b2;
+}
+
+label {
+	font-weight: bold;
+}
