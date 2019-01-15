@@ -11,6 +11,7 @@ class Results extends Component {
 	render() {
 		const { BrokenLinks, LinkNumber, BrokenLinkNumber } = this.state;
 		const WorkingLinks = LinkNumber - BrokenLinkNumber;
+		const donutVal = BrokenLinkNumber / LinkNumber * 100;
 		const data = {
 			labels: [ 'Broken', 'Working' ],
 			datasets: [
@@ -28,14 +29,16 @@ class Results extends Component {
 						<h1>Results</h1>
 						<h3>Visual Results Breakdown</h3>
 						{fileDownload(BrokenLinks, 'BrokenLinks.csv')}
-						<Doughnut
-							data={data}
-							width={50}
-							height={50}
-							options={{
-								maintainAspectRatio: false
-							}}
-						/>
+						<p>{`${donutVal}% of the links are broken`}</p>
+						<section className='chart'>
+							<Doughnut
+								data={data}
+								options={{
+									maintainAspectRatio: false
+								}}
+							/>
+						</section>
+
 						<p id='allLinks'>
 							<label htmlFor='allLinks' className='authFormLabel'>
 								All Links:
