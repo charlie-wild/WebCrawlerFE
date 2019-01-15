@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as api from './api';
 
 class Search extends Component {
   state = {
@@ -24,6 +25,7 @@ class Search extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    applicationCache
   }
 
   handleChange = ({target: { value, id }}) => {
